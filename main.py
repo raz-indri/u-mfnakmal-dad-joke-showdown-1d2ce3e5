@@ -1,21 +1,23 @@
-#!/usr/bin/env python3
-"""Entry for make.fun's "Dad Joke Showdown" bounty (u-mfnakmal-dad-joke-showdown-1d2ce3e5).
+"""Dad Joke Showdown entry.
 
-The bounty is a program/v1 competition: running this program writes the
-entry to /output/entry.txt. The contract: one dad joke of at most 200 characters. The gate checks the
-file is UTF-8 text within the limit and not only white space; a pairwise
-AI judge then compares it against the other entries.
+Writes a single dad joke (one line, at most 200 characters) to the
+output file the make.fun program/v1 harness reads: /output/entry.txt.
+The directory can be overridden with MAKEFUN_OUTPUT_DIR for local runs.
 """
+
 import os
 from pathlib import Path
 
-ENTRY = "I named our Wi-Fi 'Martin Router King' because I have a stream — and like me, it buffers whenever the whole family needs it at once."
+JOKE = (
+    "I named our Wi-Fi 'Martin Router King' because I have a stream "
+    "— but it only ever buffers when the whole family needs it most."
+)
 
 
 def main() -> None:
-    out = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "entry.txt").write_text(ENTRY, encoding="utf-8")
+    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "entry.txt").write_text(JOKE + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
